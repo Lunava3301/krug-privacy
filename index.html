@@ -5,13 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Krug — Privacy Policy</title>
 <style>
+/* Светлая палитра — база. Тёмная только переопределяет токены, поэтому
+   переключатель работает в обе стороны, а не в одну. */
 :root {
-  --bg: #FBF7F1; --card: #F4EEE4; --accent: #B5563A;
+  --bg: #FBF7F1; --card: #F4EEE4; --accent: #B5563A; --on-accent: #FFFFFF;
   --text: #211C17; --text2: #574B40; --line: #C0B39E;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --bg: #16130F; --card: #211C17; --accent: #E0806A;
-          --text: #EFE7DC; --text2: #BCAE9D; --line: #4A4038; }
+  :root:not([data-theme="light"]) {
+    --bg: #16130F; --card: #211C17; --accent: #E0806A; --on-accent: #2A1710;
+    --text: #EFE7DC; --text2: #BCAE9D; --line: #4A4038;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16130F; --card: #211C17; --accent: #E0806A; --on-accent: #2A1710;
+  --text: #EFE7DC; --text2: #BCAE9D; --line: #4A4038;
 }
 * { box-sizing: border-box; }
 body {
@@ -21,30 +29,26 @@ body {
   font-size: 16px; line-height: 1.6;
 }
 main { max-width: 680px; margin: 0 auto; }
-h1 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 32px; margin: 0 0 4px;
-}
+h1 { font-family: Georgia, "Times New Roman", serif; font-size: 32px; margin: 0 0 4px; }
 .app { color: var(--text2); font-size: 14px; margin: 0 0 24px; }
 .updated { color: var(--text2); font-size: 13px; margin: 0 0 28px; }
-section {
-  background: var(--card); border-radius: 18px;
-  padding: 18px 20px; margin-bottom: 14px;
-}
-h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 19px; margin: 0 0 10px;
-}
+section { background: var(--card); border-radius: 18px; padding: 18px 20px; margin-bottom: 14px; }
+h2 { font-family: Georgia, "Times New Roman", serif; font-size: 19px; margin: 0 0 10px; color: var(--text); }
 p { margin: 0 0 10px; color: var(--text2); }
 p:last-child { margin-bottom: 0; }
-section h2 { color: var(--text); }
-.langs { display: flex; gap: 8px; margin: 0 0 26px; }
-.langs button {
+.controls {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  align-items: center; margin: 0 0 26px;
+}
+.controls .spacer { flex: 1 1 auto; }
+.controls button {
   font: inherit; font-size: 14px; font-weight: 600;
   padding: 7px 16px; border-radius: 999px; cursor: pointer;
   border: 1px solid var(--line); background: transparent; color: var(--text2);
 }
-.langs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.controls button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
 footer { margin-top: 30px; color: var(--text2); font-size: 13px; text-align: center; }
 footer a { color: var(--accent); }
 [hidden] { display: none; }
@@ -54,11 +58,15 @@ footer a { color: var(--accent); }
 <main>
   <h1>Krug</h1>
   <p class="app">Privacy Policy · Политика конфиденциальности</p>
-  <div class="langs">
+  <div class="controls">
     <button type="button" data-lang="en" aria-pressed="true">English</button>
     <button type="button" data-lang="ru" aria-pressed="false">Русский</button>
+    <span class="spacer"></span>
+    <button type="button" data-theme-choice="light" aria-pressed="false" title="Light">Light</button>
+    <button type="button" data-theme-choice="auto" aria-pressed="true" title="Auto">Auto</button>
+    <button type="button" data-theme-choice="dark" aria-pressed="false" title="Dark">Dark</button>
   </div>
-  <div data-lang="en"><p class="updated">Last updated: 9 August 2026</p>
+  <div data-doc="en"><p class="updated">Last updated: 9 August 2026</p>
 <section><h2>In short</h2><p>Krug keeps everything on your phone. There are no accounts, no servers, no analytics and no ads.</p><p>The app does not ask for internet access at all. It cannot send your data anywhere, because it has no way to reach the network in the first place.</p></section>
 <section><h2>Who is responsible</h2><p>Krug is made by Daniil Kanukov.</p><p>Questions about this policy or about your data: daniilkanukov89@gmail.com</p></section>
 <section><h2>What Krug stores</h2><p>Whatever you put into a card: names, photos, birthdays and other dates, phone numbers, Telegram handles, addresses, how you met, professions, relatives, pets, clothing sizes, notes, tags, your own custom fields and gossip.</p><p>All of it is stored in a database on your device and nowhere else. Nobody else — including the developer — can read it.</p></section>
@@ -71,7 +79,7 @@ footer a { color: var(--accent); }
 <section><h2>Children</h2><p>Krug is not directed at children under 13 and does not knowingly collect their data.</p></section>
 <section><h2>Deleting your data</h2><p>“Delete all data” in Profile wipes the database on the spot. Uninstalling the app removes everything it stored, including photos.</p><p>Files you exported yourself are yours to delete — the app cannot reach them afterwards.</p></section>
 <section><h2>Changes to this policy</h2><p>If this policy changes, the date at the top of this screen changes with it.</p></section></div>
-  <div data-lang="ru" hidden><p class="updated">Обновлено: 9 августа 2026</p>
+  <div data-doc="ru" hidden><p class="updated">Обновлено: 9 августа 2026</p>
 <section><h2>Коротко</h2><p>«Круг» держит всё на твоём телефоне. Нет аккаунтов, нет серверов, нет аналитики и рекламы.</p><p>Приложение вообще не просит доступ в интернет. Оно не может отправить твои данные никуда, потому что выйти в сеть ему нечем.</p></section>
 <section><h2>Кто отвечает</h2><p>«Круг» сделал Даниил Канюков.</p><p>Вопросы про политику и про свои данные: daniilkanukov89@gmail.com</p></section>
 <section><h2>Что хранится</h2><p>Всё, что ты сам записал в карточку: имена, фото, дни рождения и свои даты, телефоны, ники в Телеграме, адреса, как познакомились, профессии, родственники, питомцы, размеры одежды, заметки, теги, свои графы и сплетни.</p><p>Всё это лежит в базе на твоём устройстве и больше нигде. Никто, включая разработчика, это не читает.</p></section>
@@ -87,17 +95,39 @@ footer a { color: var(--accent); }
   <footer>Krug · <a href="https://t.me/krug_app_official">t.me/krug_app_official</a></footer>
 </main>
 <script>
-const buttons = document.querySelectorAll('.langs button');
-function show(lang) {
-  document.querySelectorAll('[data-lang]').forEach(el => {
-    el.hidden = el.dataset.lang !== lang;
-  });
-  buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+// Селектор берёт только разделы: у кнопок свой атрибут. Раньше и они попадали
+// под [data-lang], и кнопка чужого языка пряталась вместе с его текстом —
+// переключиться было нечем.
+const docs = document.querySelectorAll('[data-doc]');
+const langButtons = document.querySelectorAll('[data-lang]');
+const themeButtons = document.querySelectorAll('[data-theme-choice]');
+
+function showLang(lang) {
+  docs.forEach(el => { el.hidden = el.dataset.doc !== lang; });
+  langButtons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
   document.documentElement.lang = lang;
+  try { localStorage.setItem('krug-lang', lang); } catch (e) {}
 }
-buttons.forEach(b => b.addEventListener('click', () => show(b.dataset.lang)));
-// Открываем на языке браузера — политику читают на своём.
-show((navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en');
+
+function applyTheme(choice) {
+  if (choice === 'auto') {
+    document.documentElement.removeAttribute('data-theme');
+  } else {
+    document.documentElement.setAttribute('data-theme', choice);
+  }
+  themeButtons.forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.themeChoice === choice)));
+  try { localStorage.setItem('krug-theme', choice); } catch (e) {}
+}
+
+langButtons.forEach(b => b.addEventListener('click', () => showLang(b.dataset.lang)));
+themeButtons.forEach(b => b.addEventListener('click', () => applyTheme(b.dataset.themeChoice)));
+
+let savedLang = null, savedTheme = null;
+try { savedLang = localStorage.getItem('krug-lang'); savedTheme = localStorage.getItem('krug-theme'); } catch (e) {}
+// Без выбора открываем на языке браузера — политику читают на своём.
+showLang(savedLang || ((navigator.language || 'en').toLowerCase().startsWith('ru') ? 'ru' : 'en'));
+applyTheme(savedTheme || 'auto');
 </script>
 </body>
 </html>
